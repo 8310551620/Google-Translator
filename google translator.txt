@@ -1,0 +1,22 @@
+# pip install deep-translator
+import pandas as pd
+from deep_translator import GoogleTranslator
+
+df = pd.read_excel("D:/Temp Downloads/background.xlsx")
+
+df["ENTRY_CASE_DESCRIPTION"].unique()
+
+def translator(name):
+    s = name
+    s1 = s.unique()
+    tran = []
+    for i in s1:
+        #print(i)
+        to_translate = i
+        translated = GoogleTranslator(source='auto', target='en').translate(to_translate)
+        tran.append(translated)
+
+    s.replace(s1,tran, inplace=True)
+
+translator(df["ENTRY_CASE_DESCRIPTION"])    
+df["ENTRY_CASE_DESCRIPTION"].unique()
